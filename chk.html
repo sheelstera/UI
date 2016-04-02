@@ -1,0 +1,120 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+function Apple(){}
+Apple.creat= function(conf){
+var f=conf.constructor;
+var c=conf.x;
+var j=conf.y;
+return f;
+}
+var C= Apple.creat({
+constructor: function(){this.color="green";},
+x:{a:"sheel"},
+y: function(){alert('hi');}
+})
+var bbb={
+constructor: function(){this.color="green1";},
+x:{a:"sheel1"},
+y: function(){alert('hi1');}
+};
+var D=Apple.creat(bbb);
+
+function Orange(conf1){
+var f=conf1.constructor;
+var c=conf1.x;
+var j=conf1.y;
+return f;
+}
+
+var E= Orange({
+constructor: function(){this.color="green2";},
+x:{a:"sheel2"},
+y: function(){alert('hi2');}
+})
+var bbb1={
+constructor: function(){this.color="green3";},
+x:{a:"sheel3"},
+y: function(){alert('hi3');}
+};
+var F=Orange(bbb1);
+
+
+
+
+
+
+
+var Amla = function(conf2){
+var f=conf2.constructor;
+var c=conf2.x;
+var j=conf2.y;
+return f;
+}
+
+var G= Amla({
+constructor: function(){this.color="green4";},
+x:{a:"sheel4"},
+y: function(){alert('hi4');}
+})
+var bbb2={
+constructor: function(){this.color="green5";},
+x:{a:"sheel5"},
+y: function(){alert('hi5');}
+};
+var H=Amla(bbb2);
+
+
+
+
+var handler={
+h: function(conf){
+var f=conf.constructor;
+var c=conf.x;
+var j=conf.y;
+}
+}
+
+handler.h({
+constructor: function(){this.color="green6";},
+x:{a:"sheel6"},
+y: function(){alert('hi6');}
+});
+
+var handler1={};
+
+handler1.xyz=(function(){
+					var object={};
+					object.h= function(conf){
+									var f=conf.constructor;
+									var c=conf.x;
+									var j=conf.y;
+									};
+					object.g= function(conf){
+									var f=conf.a;
+									var c=conf.x;
+									var j=conf.y;
+									};				
+					return object;
+})();
+
+handler1.xyz.h({
+constructor: function(){this.color="green7";},
+x:{a:"sheel7"},
+y: function(){alert('hi7');}
+});
+
+handler1.xyz.g({
+a: function(){this.color="green8";},
+x:"sheel8",
+y: "dsds"}
+);
+
+
+
+
+</script>
+</body>
+</html>

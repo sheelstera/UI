@@ -1,0 +1,52 @@
+<html>
+<head>
+<script>
+function Apple(){
+var v1=3;
+var v1_1=9;
+this.v2=5;
+function f1(){
+alert(v1+''+this.v2);//private functions cant access public variables/methods
+//this.f5();
+}
+
+
+this.f2=function(){
+					console.log(this);
+					this.f3();
+				}
+this.f4=function(){
+					alert("f1>f2>f3"+this.v2+v1);
+					f1();
+				}
+this.f5=function(){ 
+console.log(this)
+console.log(v1);
+console.log(v1_1);
+};
+}
+
+Apple.prototype.f3= function(){
+						this.f4();
+					}
+					
+var x = new Apple();
+x.f2();
+
+v1=4;
+function Orange(f3){
+var v1_1=8;
+console.log("In Orange:"+this);
+f3();
+//this.f3();
+}
+window.f6=x.f5;
+Orange(x.f5);
+window.f6();
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

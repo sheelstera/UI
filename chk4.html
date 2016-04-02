@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	</head>
+	<body>
+	<script>
+	
+		/* object specific settings for Orange but that naturally does not mean common template cant see it; it can; just the values come from outside as they are flexible hence called privileged; only private vars cant be seen */
+		function Orange(){
+							var v1= 1; /* private variable of class*/
+							this.v2=2; /* privileged variable of class*/
+							this.f1=function(){ /*privileged method of class*/
+												alert(v1+this.v2);
+												this.f2(); /* public method can be called from privileged method */
+											}					
+						}
+		/* common base template for Orange but that does not mean they cant see non-privileged methods (read ".prototype. for public"); they can; if needed they can call as well */				
+		Orange.prototype={  
+							v3: 3,
+							f2: function(){ /*public method of class*/
+											alert(this.v2);
+										},
+							f3: function(){ /*public method of class; privileged method can be called from public method*/
+										this.f1();
+										}			
+						}
+						
+		var orange=new Orange();	
+/*In an object instance of a class the private variables are just not displayed*/		
+		
+		
+		function Apple(){
+							var v3=3; /* private variable of class*/
+							this.v4=4; /* privileged variable of class*/
+							this.f3=function(){ /*privileged method of class*/
+												alert(v3+this.v4);
+												this.f1();
+												this.f2();
+												this.f4();
+											}
+						}
+		Apple.prototype= new Orange();
+		Apple.prototype.constructor=Apple;
+		Apple.prototype.f4=function(){
+										this.f1(); /*f4 is on the same level as f1 so it should be able to see f1*/
+										this.f2(); /*f4 is on the same level as f1 so it should be able to see f2 like f1*/
+									};						
+		var apple = new Apple();
+	</script>
+	</body>
+</html> 	

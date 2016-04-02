@@ -1,0 +1,36 @@
+<html>
+<head>
+<script>
+//common function allocation non parameter
+var provider=function(){
+console.log(v1+'');
+console.log(v1_1);
+console.log(this.v2);
+}
+
+function Apple(){
+var v1=3;
+var v1_1=9;
+this.v2=5;
+this.f1= provider;
+}
+
+
+function Orange(){
+var v1=4;
+var v1_1=8;
+this.v2=12;
+this.f1=provider;}
+
+
+var x = new Apple();
+x.f1();
+var y= new Orange();
+y.f1(); 
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

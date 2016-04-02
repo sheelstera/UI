@@ -1,0 +1,34 @@
+<html>
+<head>
+<script>
+function Provider(){
+return function(){
+console.log(this)
+console.log(v1);
+console.log(v1_1);
+}
+}
+
+function Apple(){
+var v1=3;
+var v1_1=9;
+this.v2=5;
+//this.f1=Provider();
+this.f1=Provider.apply(this);
+}
+
+var x = new Apple();
+x.f1();
+
+v1=4;
+v1_1=8;
+Orange=Provider();
+Orange();
+
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

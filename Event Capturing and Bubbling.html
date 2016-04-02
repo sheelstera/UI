@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Event Capturing and Bubbling</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <script type="text/javascript"> 
+$(document).ready(function(){
+   document.getElementsByTagName("body")[0].addEventListener("blur", function(e)  {
+    console.log("Input field lost focus.");},true);
+
+		
+});
+
+		</script>
+		
+	</head>
+	<body>
+	<input id="tf1" value="OtherText3">
+	</body>
+<html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	</head>
+	<body>
+	<script>
+function Baddie() {
+  // Set up the baddies defaults
+  this.level = 1;
+  this.hitPoints = 100;
+  this.name = "Baddie";
+}
+Baddie.prototype={ //this doesnt get copied by apply() method
+f1: function(){}
+}
+
+function Spider() {
+  // Executing Baddie with it's context set to Spider
+  // because we used `this` it now assigns it's properties
+  // level, hitPoints, and name to the Spider instance.
+  Baddie.apply(this);
+  this.color = "red";
+  this.legs = 8;
+  this.f2= function(){}
+}
+
+var regularSpider = new Spider();
+</script>
+</body>
+</html>

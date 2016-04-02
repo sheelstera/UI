@@ -1,0 +1,38 @@
+<html>
+<head>
+<script>
+//borrow a function from an object
+
+function Apple(){
+var v1=3;
+var v1_1=9;
+this.v2=5;
+this.f1= function(){
+console.log(v1+''+v1_1+''+this.v2);
+}
+}
+
+var x = new Apple();
+x.f1();
+
+function Orange(){
+var v1=4;
+var v1_1=8;
+this.v2=12;
+this.f1=x.f1;
+/*function(){
+x.f1.apply(this);
+}*/
+}
+
+
+
+var y= new Orange();
+y.f1(); 
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

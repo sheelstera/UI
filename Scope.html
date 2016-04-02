@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Scope</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        
+        
+        <script type="text/javascript"> 
+
+		function Apple(){
+			var v1=9; //private variable from  new Apple() (class) perspective; local variable from 'function of "window" object' perspective
+			var v3=8; //-do-
+			this.v3=10;//public member variable from new Apple() (class) perspective; public member variable from 'result of execution of function of "window" object' perspective 
+			that=this; //technically this is a global public variable of 'window' object as it is without 'var'
+			v4=6; //-do-
+			var prv_appleobj= this;
+			this.pub_appleobj= this;
+			//obj1 below is inaccessible outside unless Apple turns into an object
+			console.log('Hello!!Just for fun...to see if it destroys the process of object making...it doesnt');
+			function f3(){//private function
+			console.log('Yes I can be accessed from a private variable be it an object'+v4+' '+this.v4+' '+that.v3+' '+this.that.v3);
+			};
+			
+			var obj1={
+						v1:5,
+						v2:6,
+						f3:function(){
+						console.log('You are currently in obj1.f3');
+						},
+						f1: function(){
+										v1=6;//becomes global on execution of this function
+										var v6 = 7;
+										function f3(){
+										var v1=12;
+										console.log('I will screw up you trying to access f3 from Apple'+v1+' '+v6);
+										}
+										console.log(v6); //local function variable
+										console.log(v1) 
+										console.log(this.v1) //object member variable
+										console.log(v3) //since i am a (part of the overall) private member obj1 of Apple, I can access private variable of function apple
+										console.log(this.v3) //this refers to obj1 and v3 is not there in obj1 so illegal
+										console.log(that.v3)//now good to go from global object 'that'
+										console.log(prv_appleobj.v3) //now good to go from private var 'prv_appleobj'
+										console.log(that.pub_appleobj.v3)
+										f3();//will call private method of Apple as (since i am a (part of the overall) private member obj1 of Apple, I can access private variable of function apple) but good so far as no other function called f3 in me that is obj1.f1
+										//that.f3() //illegal as f3 is private of Apple and provate members are not accessed with their 'this'
+										this.f3();
+										
+									}
+					};
+					
+			this.f2= function(){obj1.f1()}; //public function from new Apple() (class) perspective; public member function from 'result of execution of function of "window" object' perspective
+			/*
+			function f4(){this.f2()}; //illegal as private function accessing public function
+			f4();
+			*/
+			
+			//public function to allow triggering of f3 from outside
+			this.f5=function (){//public function from new Apple() (class) perspective; public member function from 'result of execution of function of "window" object' perspective
+			f3();
+			}
+			
+			
+			/*
+				This object obj2 has v1 and v10 which will become global when f1 is executed. Two ways to do it:
+				- create new Apple A and then call A.obj2.f1()
+				- call Apple()--->creates window.obj2 and then calls window.obj2.f1()
+			*/
+			this.obj2={
+			v1:5,
+			v2:6,
+			f1: function(){
+							v1=6;
+							v10=99;
+						}
+					};
+			this.obj2.f1();
+	}
+	
+
+
+		</script>
+		
+	</head>
+	<body>
+	<input id="tf1" value="OtherText3">
+	</body>
+<html>

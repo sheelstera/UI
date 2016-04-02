@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Function sharing between objects</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        
+        
+        <script type="text/javascript"> 
+		
+		//Object Passing
+		function F3(conf){
+		conf.success();
+		now_global=conf
+		now_global2=conf;
+		};
+		
+		function F2(param){
+		var cc=5;
+		var sheel={};
+		sheel.testf=function(){console.log(cc)};
+		//console.log(x1);
+		param.callback();
+		console.log('Drawing the line');
+		F3({success:function(){sheel.testf();param.callback()}})
+		};
+		
+		function F1(){
+				var x1="in F1";
+				var x2="another variable";
+				console.log('Did it change? '+x2);
+				var handler={x1:"in handler"};
+				handler.callback=function(){
+											var x1="in handler.callback";
+											console.log(x1); //From adv. local variable
+											console.log(this.x1);
+											console.log(x2);
+											x2=x2+' Added';
+										};
+				
+				F2({x1:"In dynamic object",callback:handler.callback});
+		};
+		F1();
+		
+		//Function Passing
+		function F4(){
+				var x = 7;
+				var f= function(){console.log(x)}
+				F5(f);
+			}
+
+		function F5(func){
+			func()
+		}
+
+		F4();
+		
+		now_global.success();
+		var another_object={
+							vv:666, 
+							fff:function(){
+									console.log(vv)
+								}
+						}
+						
+		now_global2.v=888;
+		now_global2.f= function(){
+							console.log(this.v)
+						};
+
+		console.log('creating new F6');
+		function F6(){
+				this.x=4;
+				this.func_delegate=now_global.success;
+				this.obj= now_global;
+				//this.ffff=another_object.fff;
+				this.ffff2=now_global2.f
+				this.ffff3=now_global2.success;
+			}
+		var test_object=new F6();
+		console.log('calling func_delegate from test_object');
+		test_object.func_delegate();
+		console.log('calling obj from test_object');
+		test_object.obj.success();
+		console.log('calling ffff2 from test_object');
+		//test_object.ffff();
+		test_object.ffff2();
+		console.log('calling ffff3 from test_object');
+		test_object.ffff3();
+		F1(); //a fresh start nevertheless
+		</script>
+		
+	</head>
+	<body>
+	<input id="tf1" value="OtherText3">
+	</body>
+<html>
